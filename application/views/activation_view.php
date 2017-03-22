@@ -3,5 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 
-
-<div><h2>Դուք ակտիվացրել եք ձեր գրանցումը</h2></div>
+<div id='register_form' class='blockHead col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
+	<div><h2 class='btn-success'><?=lang('you_activated') ?></h2></div>
+</div>

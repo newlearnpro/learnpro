@@ -50,6 +50,7 @@ $lang['old_password_hint']           = 'Old password';
 $lang['new_password_hint']           = 'New Password';
 $lang['activation_code']	         = 'Код активации';
 $lang['activation']	         		 = 'Активация';
+$lang['you_activated']	             = 'Вы прошли активацию';
 
 $lang['account_created']             = 'аккаунт создан';
 $lang['img_error']                   = 'Your picture is too large';

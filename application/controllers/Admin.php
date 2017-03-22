@@ -230,13 +230,16 @@ public function add_question_as_lesson()
 }
 
 
-public function upload_picure()
+public function upload_picture()
 {
+
 	$picture_name = $this->input->post('lesson_parent_id');
 	$file_name = 'content_' . stristr($picture_name, ' ', true);
 	$config = array(
-		'upload_path' => $this->upload_folder . 'images/',
+		'upload_path' =>  $this->upload_folder . 'images/',
+		//'upload_path' => '/uploads/images/',
 		'file_name' => $file_name,
+		//'file_name' => 'sd',
 		'allowed_types' => 'jpg',
 		'overwrite' => TRUE,
 		'max_size' => '4096000',
@@ -244,9 +247,14 @@ public function upload_picure()
 		'max_width' => '1024'
 	);
 
+print_r($config);
+
+	
 	$this->load->library('upload', $config);
+	//$this->upload->do_upload('userfile');
+//echo	$this->upload->display_errors();
 	if($this->upload->do_upload('userfile')){
-		redirect($this->uri->segment(1).'/admin/index/uploadpicture');
+		redirect(base_url() . $this->uri->segment(1).'/admin/index/uploadpicture');
 	}
 }
 

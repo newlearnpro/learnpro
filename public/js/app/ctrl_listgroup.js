@@ -50,6 +50,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
     $scope.loadPosition = function() {
+        var username = document.querySelector('#username').innerHTML;
         $("#glu").css({
             'width': $('.mainPage').width(),
             'height': parseInt($('.mainPage').width()) / 1.4
@@ -67,8 +68,13 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
 
+     //   setTimeout(function(){
+       
+   // },200);
 
 
+   
+           
 
 
 
@@ -98,11 +104,29 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 } else if ($('.position1').has('a').length) {
                     $('.position1').attr('dirq', 1);
                 }
-                /*    $timeout(function() {
-                        console.log($('.position1').has('a').length)
-                    }, 1000);*/
 
+
+
+                console.log($.cookie(name).name);
+                if($.cookie(name).name != username){
+                 //   $timeout(function(){
+                        
+                        $('.mainPosition div[data1^="102"]').children('a').trigger('click');
+                        $('.mainPosition div[data1^="116"]').children('a').trigger('click');
+                        $timeout(function(){
+                            $('.mainPosition div[data1^="128"]').children('a').trigger('click');
+                            $('#menuBtn').trigger('click');
+                        },200);
+                  //  },100);
+                }
+                if($.cookie(name).name == username){
+                    $('.mainPosition div[data1^="102"]').children('a').trigger('click');
+                    $('.mainPosition div[data1^="116"]').children('a').trigger('click');        
+                    $('.mainPosition div[data1^="128"]').children('a').trigger('click');
+                    $('.mainPosition div[data1^="'+$.cookie(name).position_id+'"]').children('a').trigger('click');
+                }
             }, 10);
+
         });
     }
 
@@ -123,7 +147,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
             position_cur2.parent().parent().children().removeAttr('openFolder');
             $("#lp_carousel").hide();
-
 
 
 
@@ -174,24 +197,34 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     'id': that.items.id
                 }
             }).success(function(data, status) {
+                //console.log(data)  
                 $http({
                     method: 'POST',
                     url: 'get_users_license_code_bypos',
                     data: {
                         username: username,
                     }
-                }).success(function(data, status) {
+                }).success(function(data, status) {   
+
                     $('.mainPosition div[data3^="1"').css({
                         'visibility': 'hidden',
                         'height': '1px'
                     });
                     for (let i = 0; i < data.length; i++) {
+                        
                         //$timeout(function() {
                         if (data[i].license_type == 'standartplus') {
                             $('.mainPosition div[data2^="' + data[i].position_id + '"][data3^="1"]').css({
                                 'visibility': 'visible',
                                 'height': 'auto'
-                            });
+                            });                            
+                        }
+                        if (data[i].license_type == 'standartschool') {
+                           //console.log(data[i].position_id);
+                            $('.mainPosition div[data1^="' + 105 + '"], .mainPosition div[data1^="' + 115 + '"], .mainPosition div[data1^="' + 143 + '"], .mainPosition div[data1^="' + 144 + '"], .mainPosition div[data1^="' + 145 + '"]').css({
+                                'visibility': 'hidden',
+                                'height': '1px'
+                            });                            
                         }
                         //}, 10);
                     }
@@ -199,8 +232,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                 $scope.lessons = data;
                 $timeout(function() {
-                    //console.log(data);
+                    
                     if (data.length != 0) {
+                        $.cookie('name', username, {expires:7, path: '/'});
+                        $.cookie('position_id', $scope.position_id, {expires:7, path: '/'});
                         $("#menuModal").modal("hide");
                     }
 
@@ -322,6 +357,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             //  var position_parent_id = $('.position_name_header').attr('data2');
             //  var class_name = $('.position_name_header').text();
             // console.log(class_id)
+
+           // console.log($('.position_name_header').attr('data1'))
 
             $http({
                 method: 'POST',

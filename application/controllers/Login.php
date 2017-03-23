@@ -440,7 +440,8 @@ $data['status'] = array(
 
   public function end()
   {
-      echo "Դուք դուրս եկաք համակարգից";
+      //echo "Դուք դուրս եկաք համակարգից";
+        $this->load->view('schoolend_view');
   }
 
   public function validate_captcha()

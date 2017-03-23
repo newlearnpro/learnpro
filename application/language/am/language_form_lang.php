@@ -24,6 +24,7 @@ $lang['new_password_hint']           = 'Նոր գաղտնաբառ';
 $lang['activation_code']	         = 'Ակտիվացման կոդ';
 $lang['activation']	        		 = 'Ակտիվացրած է';
 $lang['you_activated']	             = 'Ակտիվացիան հաջողությամբ ավարտված է';
+$lang['you_exited']	             	 = 'Դուք դուրս եկաք կայքից';
 
 
 $lang['account_created']             = 'Գրանցումը հաջողությամբ ավարտված է';
